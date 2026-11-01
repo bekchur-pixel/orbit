@@ -39,12 +39,6 @@ export default function YouTubeSection() {
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600/20 text-red-500">
             <YouTubeIcon className="h-8 w-8" />
           </span>
-          <p className="max-w-md text-sm text-white/70">
-            En yeni videoları izlemek için YouTube kanalına git. Öne çıkan bir video
-            eklemek için <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs">src/lib/data.ts</code>{" "}
-            dosyasındaki <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs">featuredYouTubeVideoId</code>{" "}
-            değerini doldur.
-          </p>
           <span className="inline-flex items-center gap-2 text-sm font-semibold text-red-400 group-hover:text-red-300">
             Videoları İzle <ExternalLinkIcon className="h-4 w-4" />
           </span>
