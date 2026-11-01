@@ -16,18 +16,8 @@ Aç: http://localhost:3000
 Tüm içerik `src/lib/data.ts` dosyasından düzenlenir:
 
 - `site`: isim, handle, tagline, bio
-- `socials`: sosyal medya linkleri
-- `instagramPosts`: Instagram gönderi linkleri + görseller (duvar için)
+- `socials`: sosyal medya linkleri (Instagram, YouTube)
 - `featuredYouTubeVideoId`: öne çıkan YouTube video id'si
-- `beholdFeedId` veya `NEXT_PUBLIC_BEHOLD_FEED_ID`: gerçek Instagram akışı (https://behold.so)
-
-## Instagram Akışı
-
-Gerçek bir Instagram duvarı için [Behold.so](https://behold.so) kullanabilirsiniz (ücretsiz plan mevcut):
-
-1. Behold'da bir feed oluşturun ve Instagram hesabınızı bağlayın.
-2. Feed id'sini `.env.local` dosyasına `NEXT_PUBLIC_BEHOLD_FEED_ID=...` olarak ekleyin.
-3. Alternatif olarak `src/lib/data.ts` içindeki `instagramPosts` dizisine gönderi linklerini ve görsel URL'lerini ekleyin.
 
 ## Dağıtım (Vercel)
 
