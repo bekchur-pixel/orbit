@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Orbit Goal — Profil Sayfası
 
-## Getting Started
+Next.js (App Router) ile oluşturulmuş profil tanıtma sayfası. Instagram ve YouTube kanallarını tek bir yerde sunar.
 
-First, run the development server:
+## Geliştirme
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aç: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Özelleştirme
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tüm içerik `src/lib/data.ts` dosyasından düzenlenir:
 
-## Learn More
+- `site`: isim, handle, tagline, bio
+- `socials`: sosyal medya linkleri
+- `instagramPosts`: Instagram gönderi linkleri + görseller (duvar için)
+- `featuredYouTubeVideoId`: öne çıkan YouTube video id'si
+- `beholdFeedId` veya `NEXT_PUBLIC_BEHOLD_FEED_ID`: gerçek Instagram akışı (https://behold.so)
 
-To learn more about Next.js, take a look at the following resources:
+## Instagram Akışı
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Gerçek bir Instagram duvarı için [Behold.so](https://behold.so) kullanabilirsiniz (ücretsiz plan mevcut):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Behold'da bir feed oluşturun ve Instagram hesabınızı bağlayın.
+2. Feed id'sini `.env.local` dosyasına `NEXT_PUBLIC_BEHOLD_FEED_ID=...` olarak ekleyin.
+3. Alternatif olarak `src/lib/data.ts` içindeki `instagramPosts` dizisine gönderi linklerini ve görsel URL'lerini ekleyin.
 
-## Deploy on Vercel
+## Dağıtım (Vercel)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Bu repoyu GitHub'a push edin.
+2. Vercel'de "New Project" → repoyu seçin.
+3. Environment Variables bölümüne `NEXT_PUBLIC_BEHOLD_FEED_ID` ve `NEXT_PUBLIC_SITE_URL` ekleyin.
+4. Deploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Logo
+
+Logo `public/orbit-logo.png` konumundadır. Değiştirmek için aynı adla yeni dosya koyun.
