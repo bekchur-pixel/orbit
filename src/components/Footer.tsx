@@ -4,11 +4,6 @@ export default function Footer() {
       <p>
         © {new Date().getFullYear()} Orbit Goal. Tüm hakları saklıdır.
       </p>
-      <p className="mt-3">
-        <a href="/futbol" className="text-xs text-emerald-400 transition-colors hover:text-emerald-300">
-          ⚽ Futbol fikstürü ve puan durumu →
-        </a>
-      </p>
       <p className="mt-1 text-xs text-white/30">
         Next.js ile oluşturuldu • Vercel üzerinde barındırılıyor
       </p>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { site } from "@/lib/data";
 import { ArrowDownIcon } from "./Icons";
 
@@ -41,6 +42,27 @@ export default function Hero() {
         Keşfet
         <ArrowDownIcon className="h-4 w-4" />
       </a>
+
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <Link
+          href="/futbol?league=tr"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+        >
+          🇹🇷 Süper Lig
+        </Link>
+        <Link
+          href="/futbol?league=en"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+        >
+          🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League
+        </Link>
+        <Link
+          href="/futbol?league=es"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+        >
+          🇪🇸 La Liga
+        </Link>
+      </div>
     </section>
   );
 }

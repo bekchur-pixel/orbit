@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 type Match = {
@@ -44,9 +45,12 @@ const LEAGUES = [
   { id: "es", label: "La Liga", flag: "🇪🇸" },
 ];
 
-export default function FutbolPage() {
-  const [league, setLeague] = useState("tr");
-  const [season, setSeason] = useState("2026-27");
+function FutbolPageInner() {
+  const searchParams = useSearchParams();
+  const initialLeague = searchParams.get("league") || "tr";
+  const initialSeason = searchParams.get("season") || "2026-27";
+  const [league, setLeague] = useState(initialLeague);
+  const [season, setSeason] = useState(initialSeason);
   const [data, setData] = useState<Data | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -319,5 +323,13 @@ function Fixtures({
         )}
       </div>
     </div>
+  );
+}
+
+export default function FutbolPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0f]" />}>
+      <FutbolPageInner />
+    </Suspense>
   );
 }
