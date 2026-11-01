@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { beholdFeedId, instagramPosts } from "@/lib/data";
 import { InstagramIcon } from "./Icons";
 
+type Post = { url: string; image?: string; caption?: string };
+
 export default function InstagramFeed() {
-  // Behold.so real feed
+  // Behold.so real feed (highest priority, fully automatic after setup)
   if (beholdFeedId) {
     return (
       <div className="w-full">
@@ -15,46 +17,62 @@ export default function InstagramFeed() {
     );
   }
 
-  // Manual posts
+  // Manual posts override
   if (instagramPosts.length > 0) {
+    return <PostGrid posts={instagramPosts} />;
+  }
+
+  // Automatic fetch
+  return <AutoFeed />;
+}
+
+function AutoFeed() {
+  const [posts, setPosts] = useState<Post[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/instagram")
+      .then((r) => r.json())
+      .then((data) => {
+        if (cancelled) return;
+        setPosts(Array.isArray(data?.posts) ? data.posts : []);
+      })
+      .catch(() => {
+        if (!cancelled) setPosts([]);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (loading) {
     return (
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {instagramPosts.map((p, i) => (
-          <a
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
             key={i}
-            href={p.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative aspect-square overflow-hidden rounded-xl border border-white/10 bg-white/5"
-          >
-            {p.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={p.image}
-                alt={p.caption ?? "Instagram post"}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-yellow-500/20">
-                <InstagramIcon className="h-8 w-8 text-white/40" />
-              </div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-          </a>
+            className="aspect-square animate-pulse rounded-xl border border-white/10 bg-white/5"
+          />
         ))}
       </div>
     );
   }
 
-  // Placeholder wall
+  if (posts && posts.length > 0) {
+    return <PostGrid posts={posts} />;
+  }
+
+  // Fallback
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
           className="relative aspect-square overflow-hidden rounded-xl border border-white/10 bg-white/5"
-          style={{ animationDelay: `${i * 80}ms` }}
         >
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-yellow-500/10" />
           <div className="absolute inset-0 flex items-center justify-center">
@@ -65,9 +83,12 @@ export default function InstagramFeed() {
       <div className="col-span-2 flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-white/20 bg-white/5 p-6 text-center sm:col-span-3">
         <InstagramIcon className="h-8 w-8 text-pink-400" />
         <p className="text-sm text-white/70">
-          Instagram gönderilerin burada görünmesi için{" "}
+          Otomatik akış şu an yüklenemedi (Instagram erişim kısıtı). En güvenilir
+          yöntem için Behold.so feed id tanımlayın, Instagram Graph API token'ı
+          (<code className="rounded bg-white/10 px-1.5 py-0.5 text-xs">INSTAGRAM_ACCESS_TOKEN</code>)
+          ekleyin veya{" "}
           <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs">src/lib/data.ts</code>{" "}
-          dosyasına gönderi linklerini ekleyin veya Behold.so feed id tanımlayın.
+          içine gönderi linklerini ekleyin.
         </p>
         <a
           href="https://www.instagram.com/orbitgoall/"
@@ -78,6 +99,37 @@ export default function InstagramFeed() {
           Instagram&apos;da Takip Et
         </a>
       </div>
+    </div>
+  );
+}
+
+function PostGrid({ posts }: { posts: Post[] }) {
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      {posts.map((p, i) => (
+        <a
+          key={i}
+          href={p.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative aspect-square overflow-hidden rounded-xl border border-white/10 bg-white/5"
+        >
+          {p.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={p.image}
+              alt={p.caption ?? "Instagram post"}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-yellow-500/20">
+              <InstagramIcon className="h-8 w-8 text-white/40" />
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+        </a>
+      ))}
     </div>
   );
 }
