@@ -15,7 +15,6 @@ export default function Home() {
       <Hero />
 
       <section id="channels" className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-6 pb-12">
-        <h2 className="text-2xl font-bold text-white">Kanallarım</h2>
         <SocialLinks />
       </section>
 

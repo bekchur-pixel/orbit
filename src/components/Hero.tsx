@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { site } from "@/lib/data";
-import { ArrowDownIcon } from "./Icons";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 py-20 text-center">
+    <section className="relative flex min-h-[60vh] flex-col items-center justify-center px-6 py-12 text-center">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-pink-500/30 via-purple-500/20 to-blue-500/30 blur-3xl" />
       </div>
@@ -34,13 +33,6 @@ export default function Hero() {
       </p>
       <p className="mt-2 max-w-xl text-sm text-white/50">{site.bio}</p>
 
-      <a
-        href="#channels"
-        className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white/10"
-      >
-        Keşfet
-        <ArrowDownIcon className="h-4 w-4" />
-      </a>
     </section>
   );
 }
