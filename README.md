@@ -19,10 +19,6 @@ Tüm içerik `src/lib/data.ts` dosyasından düzenlenir:
 - `socials`: sosyal medya linkleri (Instagram, YouTube)
 - `featuredYouTubeVideoId`: öne çıkan YouTube video id'si
 
-## Futbol Sayfası
-
-`/futbol` sayfası; Süper Lig, Premier League ve La Liga için puan durumu ve fikstür/haftalık maç skorlarını gösterir. Veri kaynağı: [openfootball/football.json](https://github.com/openfootball/football.json) (API anahtarı gerekmez). Sezon seçici ve hafta navigasyonu mevcut. Türkçeye özgü karakterler veri kaynağından geldiği gibi gösterilir.
-
 ## Dağıtım (Vercel)
 
 1. Bu repoyu GitHub'a push edin.
