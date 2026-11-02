@@ -1,9 +1,10 @@
 import { socials } from "@/lib/data";
-import { InstagramIcon, YouTubeIcon, ExternalLinkIcon } from "./Icons";
+import { InstagramIcon, YouTubeIcon, TikTokIcon, ExternalLinkIcon } from "./Icons";
 
 const iconMap = {
   instagram: InstagramIcon,
   youtube: YouTubeIcon,
+  tiktok: TikTokIcon,
 };
 
 export default function SocialLinks() {

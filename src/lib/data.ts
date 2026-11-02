@@ -24,6 +24,14 @@ export const socials = [
     color: "from-red-600 to-red-500",
     icon: "youtube" as const,
   },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    handle: "@orbitgoall",
+    href: "https://www.tiktok.com/@orbitgoall",
+    color: "from-neutral-900 to-pink-600",
+    icon: "tiktok" as const,
+  },
 ];
 
 // Optional: set a featured YouTube video id (the part after v=) to embed it.
