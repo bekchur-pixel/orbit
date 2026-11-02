@@ -1,7 +1,11 @@
+"use client";
+
 import { featuredYouTubeVideoId } from "@/lib/data";
 import { YouTubeIcon, ExternalLinkIcon } from "./Icons";
+import { useLanguage } from "./LanguageProvider";
 
 export default function YouTubeSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full max-w-3xl">
       <div className="mb-4 flex items-center justify-between">
@@ -13,7 +17,7 @@ export default function YouTubeSection() {
           className="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-1.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
         >
           <YouTubeIcon className="h-4 w-4" />
-          Abone Ol
+          {t("subscribe")}
         </a>
       </div>
 
@@ -40,7 +44,7 @@ export default function YouTubeSection() {
             <YouTubeIcon className="h-8 w-8" />
           </span>
           <span className="inline-flex items-center gap-2 text-sm font-semibold text-red-400 group-hover:text-red-300">
-            Videoları İzle <ExternalLinkIcon className="h-4 w-4" />
+            {t("watchVideos")} <ExternalLinkIcon className="h-4 w-4" />
           </span>
         </a>
       )}

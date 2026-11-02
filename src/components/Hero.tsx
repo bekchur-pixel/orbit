@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { site } from "@/lib/data";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Hero() {
+  const { t, lang, setLang } = useLanguage();
   return (
     <section className="relative flex min-h-[60vh] flex-col items-center justify-center px-6 py-12 text-center">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -24,14 +28,21 @@ export default function Hero() {
         </span>
       </div>
 
+      <button
+        onClick={() => setLang(lang === "tr" ? "en" : "tr")}
+        className="absolute right-6 top-6 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur transition-all hover:bg-white/10"
+      >
+        {t("langLabel")}
+      </button>
+
       <h1 className="mt-8 bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-6xl">
         {site.name}
       </h1>
       <p className="mt-2 text-lg font-medium text-pink-300 sm:text-xl">{site.handle}</p>
       <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-        {site.tagline}
+        {t("tagline")}
       </p>
-      <p className="mt-2 max-w-xl text-sm text-white/50">{site.bio}</p>
+      <p className="mt-2 max-w-xl text-sm text-white/50">{t("bio")}</p>
 
     </section>
   );

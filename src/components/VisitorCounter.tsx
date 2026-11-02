@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
 export default function VisitorCounter() {
+  const { t, lang } = useLanguage();
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
@@ -20,9 +22,10 @@ export default function VisitorCounter() {
 
   if (count === null) return null;
 
-  return (
-    <p className="mt-2 text-xs text-white/40">
-      Bu sayfa {count.toLocaleString("tr-TR")} kez ziyaret edilmiştir.
-    </p>
+  const text = t("visitorCount").replace(
+    "{n}",
+    count.toLocaleString(lang === "tr" ? "tr-TR" : "en-US")
   );
+
+  return <p className="mt-2 text-xs text-white/40">{text}</p>;
 }
